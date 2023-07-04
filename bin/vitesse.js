@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
 function start() {
-    return import('../dist/node/cli.js')
+  console.log('call func start')
+  return import('../dist/node/cli.js')
 }
+
+start()

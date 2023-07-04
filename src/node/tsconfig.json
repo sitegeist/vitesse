@@ -1,0 +1,7 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["./", "../dep-types", "../types"],
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"]
+  }
+}

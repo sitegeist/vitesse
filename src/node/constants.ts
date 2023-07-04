@@ -1,1 +1,1 @@
-export const TEST_KONSTANTE = 'einTest'
+export const DEFAULT_CONFIG_NAME = 'vitesse.config.json'

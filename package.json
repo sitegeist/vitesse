@@ -19,7 +19,9 @@
   },
   "scripts": {
     "build": "rimraf dist && yarn build-bundle",
-    "build-bundle": "rollup --config rollup.config.ts --configPlugin typescript"
+    "watch": "rimraf dist && yarn watch-bundle",
+    "build-bundle": "rollup --config rollup.config.ts --configPlugin typescript",
+    "watch-bundle": "rollup --config rollup.config.ts --configPlugin typescript --watch"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^6.0.0",
