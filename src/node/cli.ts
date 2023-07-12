@@ -2,6 +2,8 @@
 // import fs from 'node:fs'
 import { cac } from 'cac'
 
+const { getSettings } = await import('./utils')
+
 const cli = cac('vitesse')
 
 console.log('ClI ts loaded')
@@ -19,15 +21,19 @@ cli
     // const buildOptions = cleanOptions(options)
 
     try {
-      await build({
-        mode: options.mode,
-        configFileName: options.config
-      })
+      await build(
+        await getSettings(options.configFileName),
+        {
+          mode: options.mode,
+          configFileName: options.config,
+          watch: options.watch
+        }
+      )
     } catch (e) {
       throw e
       process.exit(1)
     } finally {
-      console.log('Build finished')
+      console.log('Build finished (not yet)')
     }
   })
 
