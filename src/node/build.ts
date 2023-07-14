@@ -1,7 +1,8 @@
 import { build as viteBuild } from 'vite'
 // import path from 'node:path'
-import sassConfig from './viteConfig/sass'
-import typescriptConfig from './viteConfig/typescript'
+import sassConfig from './viteConfigs/sass'
+import scriptConfig from './viteConfigs/script'
+import buildSpritemap from './functions/spritemap'
 
 export async function build(userSettings: any, options: any) {
   console.log('build function fire')
@@ -21,9 +22,15 @@ export async function build(userSettings: any, options: any) {
       })()
     }
 
-    if (userSettings.typescript && (!options.mode || options.mode === 'typescript')) {
+    if (userSettings.script && (!options.mode || options.mode === 'script')) {
       ;(async () => {
-        await viteBuild(typescriptConfig(userSettings, options))
+        await viteBuild(scriptConfig(userSettings, options))
+      })()
+    }
+
+    if (userSettings.spritemap && (!options.mode || options.mode === 'spritemap')) {
+      ;(async () => {
+        await buildSpritemap(userSettings, options)
       })()
     }
 

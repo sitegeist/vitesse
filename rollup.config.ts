@@ -65,6 +65,10 @@ function createNodePlugins(
 }
 
 function createNodeConfig(isProduction: boolean) {
+  console.log([
+    'vite',
+    ...(isProduction ? [] : Object.keys(pkg.devDependencies))
+  ])
   return defineConfig({
     ...sharedNodeOptions,
     input: {
@@ -78,6 +82,7 @@ function createNodeConfig(isProduction: boolean) {
     },
     external: [
       'vite',
+      'svg-sprite', // move these to 'dependencies'? or move all to dependencies? whats the difference in this setup?
       ...Object.keys(pkg.dependencies),
       ...(isProduction ? [] : Object.keys(pkg.devDependencies)),
     ],
@@ -151,7 +156,7 @@ function createNodeConfig(isProduction: boolean) {
 // }
 
 export default (commandLineArgs: any): RollupOptions[] => {
-  const isDev = commandLineArgs.watch
+  const isDev = commandLineArgs.watch // ToDo: check if this is really utilized
   const isProduction = !isDev
 
   return defineConfig([
