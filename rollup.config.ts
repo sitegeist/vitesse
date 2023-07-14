@@ -65,10 +65,6 @@ function createNodePlugins(
 }
 
 function createNodeConfig(isProduction: boolean) {
-  console.log([
-    'vite',
-    ...(isProduction ? [] : Object.keys(pkg.devDependencies))
-  ])
   return defineConfig({
     ...sharedNodeOptions,
     input: {

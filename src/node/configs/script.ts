@@ -21,8 +21,6 @@ const scriptConfig = (userSettings: any, options: any) => {
   //   'Resources/Private/Components/Molecule/Another/Another.ts', 'Resources/Private/Components/Atom/Initial/Initial.ts', 'Resources/Private/JavaScript/Main.ts'
   // ]
 
-  console.log(inputFiles)
-
   const outputDir = userSettings.script.outputPath ? path.resolve(process.cwd(), userSettings.script.outputPath) : path.resolve(process.cwd(), './Resources/Public/JavaScript/') // default aus constants nehmen
   const fileFormat = userSettings.script.outputFilePattern ? userSettings.script.outputFilePattern : '[name].min[extname]'
 

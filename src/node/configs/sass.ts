@@ -11,8 +11,6 @@ const sassConfig = (userSettings: any, options: any) => {
     {}
   )
 
-  console.log(inputFiles)
-
   const outputDir = userSettings.sass.outputPath ? path.resolve(process.cwd(), userSettings.sass.outputPath) : path.resolve(process.cwd(), './Resources/Public/Css/') // default aus constants nehmen
   const fileFormat = userSettings.sass.outputFilePattern ? userSettings.sass.outputFilePattern : '[name].min[extname]'
 

@@ -50,6 +50,7 @@
     "@types/node": "^20.3.3"
   },
   "dependencies": {
+    "chokidar": "^3.5.3",
     "glob-all": "^3.3.1",
     "rollup": "^3.26.0",
     "rollup-plugin-node-polyfills": "^0.2.1"

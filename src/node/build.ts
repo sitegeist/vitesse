@@ -1,7 +1,7 @@
 import { build as viteBuild } from 'vite'
 // import path from 'node:path'
-import sassConfig from './viteConfigs/sass'
-import scriptConfig from './viteConfigs/script'
+import sassConfig from './configs/sass'
+import scriptConfig from './configs/script'
 import buildSpritemap from './functions/spritemap'
 
 export async function build(userSettings: any, options: any) {
