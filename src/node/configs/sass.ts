@@ -1,15 +1,17 @@
 import path from 'node:path'
+import { globSync } from 'glob'
 import sassGlobImports from 'vite-plugin-sass-glob-import'
 
 const sassConfig = (userSettings: any, options: any) => {
-  // change this pattern to take a simple array as the typescript config?
-  const inputFiles = Object.keys(userSettings.sass.inputFiles).reduce(
-    (attr, key) => ({
-      ...attr,
-      [key]: userSettings.sass.inputFiles[key]
-    }),
-    {}
-  )
+  // const inputFiles = Object.keys(userSettings.sass.inputFiles).reduce(
+  //   (attr, key) => ({
+  //     ...attr,
+  //     [key]: userSettings.sass.inputFiles[key]
+  //   }),
+  //   {}
+  // )
+
+  const inputFiles = globSync(userSettings.sass.inputFiles)
 
   const outputDir = userSettings.sass.outputPath ? path.resolve(process.cwd(), userSettings.sass.outputPath) : path.resolve(process.cwd(), './Resources/Public/Css/') // default aus constants nehmen
   const fileFormat = userSettings.sass.outputFilePattern ? userSettings.sass.outputFilePattern : '[name].min[extname]'
@@ -27,7 +29,8 @@ const sassConfig = (userSettings: any, options: any) => {
           assetFileNames: fileFormat,
         },
       },
-      outDir: outputDir
+      outDir: outputDir,
+      emptyOutDir: userSettings.emptyOutDir || false
     },
     plugins: [
       sassGlobImports()

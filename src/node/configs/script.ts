@@ -1,5 +1,6 @@
 import path from 'node:path'
 import { globSync } from 'glob'
+import react from '@vitejs/plugin-react'
 
 const scriptConfig = (userSettings: any, options: any) => {
   // const inputFiles = Object.keys(userSettings.script.inputFiles).reduce(
@@ -36,9 +37,11 @@ const scriptConfig = (userSettings: any, options: any) => {
           entryFileNames: "[name].js", // ?
           assetFileNames: fileFormat,
         },
+        plugins: [ react() ],
         // plugins: [ multiInput() ],
       },
-      outDir: outputDir
+      outDir: outputDir,
+      emptyOutDir: userSettings.emptyOutDir || false
     }
   }
 }
