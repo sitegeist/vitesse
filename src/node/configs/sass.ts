@@ -25,7 +25,7 @@ const sassConfig = (userSettings: any, options: any) => {
       rollupOptions: {
         input: inputFiles,
         output: {
-          entryFileNames: "[name].js", // ?
+          entryFileNames: "[name].min.js", // ?
           assetFileNames: fileFormat,
         },
       },

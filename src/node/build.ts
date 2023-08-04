@@ -1,6 +1,7 @@
 import { build as viteBuild } from 'vite'
 // import path from 'node:path'
 import sassConfig from './configs/sass'
+import cssConfig from './configs/css'
 import scriptConfig from './configs/script'
 import buildSpritemap from './functions/spritemap'
 
@@ -16,9 +17,15 @@ export async function build(userSettings: any, options: any) {
     // console.log('outDir', path.resolve(process.cwd(), userSettings.sass.outputPath))
 
     // console.log(userSettings)
+    // if (userSettings.sass && (!options.mode || options.mode === 'sass')) {
+    //   ;(async () => {
+    //     await viteBuild(sassConfig(userSettings, options))
+    //   })()
+    // }
+
     if (userSettings.sass && (!options.mode || options.mode === 'sass')) {
       ;(async () => {
-        await viteBuild(sassConfig(userSettings, options))
+        await viteBuild(cssConfig(userSettings, options))
       })()
     }
 

@@ -23,7 +23,7 @@ const scriptConfig = (userSettings: any, options: any) => {
   // ]
 
   const outputDir = userSettings.script.outputPath ? path.resolve(process.cwd(), userSettings.script.outputPath) : path.resolve(process.cwd(), './Resources/Public/JavaScript/') // default aus constants nehmen
-  const fileFormat = userSettings.script.outputFilePattern ? userSettings.script.outputFilePattern : '[name].min[extname]'
+  const fileFormat = userSettings.script.outputFilePattern ? userSettings.script.outputFilePattern : '[name].min.js' // greift hier noch nicht
 
   return {
     root: process.cwd(), // default?
@@ -34,8 +34,8 @@ const scriptConfig = (userSettings: any, options: any) => {
       rollupOptions: {
         input: inputFiles,
         output: {
-          entryFileNames: "[name].js", // ?
-          assetFileNames: fileFormat,
+          entryFileNames: fileFormat, // ?
+          assetFileNames: '[name].min[extname]',
         },
         plugins: [ react() ],
         // plugins: [ multiInput() ],
