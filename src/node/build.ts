@@ -14,16 +14,16 @@ export async function build(userSettings: any, options: any) {
     // console.log('config:', await getSettings(options))
     // const userSettings = await getSettings(options.configFileName) // userSettings früher laden und übergeben?
 
-    // console.log('outDir', path.resolve(process.cwd(), userSettings.sass.outputPath))
+    // console.log('outDir', path.resolve(process.cwd(), userSettings.styles.outputPath))
 
     // console.log(userSettings)
-    // if (userSettings.sass && (!options.mode || options.mode === 'sass')) {
+    // if (userSettings.styles && (!options.mode || options.mode === 'sass')) {
     //   ;(async () => {
     //     await viteBuild(sassConfig(userSettings, options))
     //   })()
     // }
 
-    if (userSettings.sass && (!options.mode || options.mode === 'sass')) {
+    if (userSettings.styles && (!options.mode || options.mode === 'sass')) {
       ;(async () => {
         await viteBuild(cssConfig(userSettings, options))
       })()

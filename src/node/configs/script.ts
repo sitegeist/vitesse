@@ -22,12 +22,15 @@ const scriptConfig = (userSettings: any, options: any) => {
   //   'Resources/Private/Components/Molecule/Another/Another.ts', 'Resources/Private/Components/Atom/Initial/Initial.ts', 'Resources/Private/JavaScript/Main.ts'
   // ]
 
-  const outputDir = userSettings.script.outputPath ? path.resolve(process.cwd(), userSettings.script.outputPath) : path.resolve(process.cwd(), './Resources/Public/JavaScript/') // default aus constants nehmen
+  const outputPath = userSettings.script.outputPath || './Resources/Public/JavaScript/'
+  const outputDir = path.resolve(process.cwd(), outputPath) // defaults aus constants nehmen
+  const extPath = userSettings.extensionPath ? path.resolve(userSettings.extensionPath, outputPath) : path.resolve('/typo3conf/ext/sitepackage/', outputPath) // default aus constants nehmen
+  // const outputDir = userSettings.script.outputPath ? path.resolve(process.cwd(), userSettings.script.outputPath) : path.resolve(process.cwd(), './Resources/Public/JavaScript/') // default aus constants nehmen
   const fileFormat = userSettings.script.outputFilePattern ? userSettings.script.outputFilePattern : '[name].min.js' // greift hier noch nicht
 
   return {
     root: process.cwd(), // default?
-    base: '/',
+    base: extPath,
     build: {
       manifest: true,
       watch: options.watch ? {} : null,

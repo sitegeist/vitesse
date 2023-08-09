@@ -11,17 +11,34 @@ const require = createRequire(import.meta.url); // feels like a bad way, no dyna
 
 const cssConfig = (userSettings: any, options: any) => {
 
-  const inputFiles = globSync(userSettings.sass.inputFiles)
+  const inputFiles = globSync(userSettings.styles.inputFiles)
 
-  const outputDir = userSettings.sass.outputPath ? path.resolve(process.cwd(), userSettings.sass.outputPath) : path.resolve(process.cwd(), './Resources/Public/Css/') // default aus constants nehmen
-  const fileFormat = userSettings.sass.outputFilePattern ? userSettings.sass.outputFilePattern : '[name].min[extname]' // change to ||
-  const tailwindConfigPath = userSettings.sass.tailwindConfigFile ? path.resolve(process.cwd(), userSettings.sass.tailwindConfigFile) : path.resolve(process.cwd(), './tailwind.config.js') // change to ||
+  const outputPath = userSettings.styles.outputPath || './Resources/Public/Css/'
+  const outputDir = path.resolve(process.cwd(), outputPath) // defaults aus constants nehmen
+  const extPath = userSettings.extensionPath ? path.resolve(userSettings.extensionPath, outputPath) : path.resolve('/typo3conf/ext/sitepackage/', outputPath) // default aus constants nehmen
+  const fileFormat = userSettings.styles.outputFilePattern || '[name].min[extname]' // change to ||
 
-  console.log('TAILWIND CONFIG FILE', tailwindConfigPath)
+  let postCssPlugins = [
+    require('autoprefixer')()
+  ]
 
+  if (!userSettings.excludeTailwind) {
+    const tailwindConfigPath = userSettings.styles.tailwindConfigFile ? path.resolve(process.cwd(), userSettings.styles.tailwindConfigFile) : path.resolve(process.cwd(), './tailwind.config.js')
+
+    postCssPlugins = [
+      require('tailwindcss')({ config: tailwindConfigPath }),
+      ...postCssPlugins
+    ]
+  }
+
+  // console.log('TAILWIND CONFIG FILE', tailwindConfigPath)
+  // console.log('CURRENT ENVT', process.env)
+  console.log('newoutpath', extPath)
+
+  // ToDo: mode for production and dev in watcher
   return {
     root: process.cwd(), // default?
-    base: '/',
+    base: extPath,
     build: {
       manifest: true,
       watch: options.watch ? {} : null,
@@ -37,10 +54,7 @@ const cssConfig = (userSettings: any, options: any) => {
     },
     css: {
       postcss: {
-        plugins: [
-          require('tailwindcss')({ config: tailwindConfigPath }),
-          require('autoprefixer')()
-        ]
+        plugins: postCssPlugins
       }
     },
     // css: {

@@ -3,18 +3,18 @@ import { globSync } from 'glob'
 import sassGlobImports from 'vite-plugin-sass-glob-import'
 
 const sassConfig = (userSettings: any, options: any) => {
-  // const inputFiles = Object.keys(userSettings.sass.inputFiles).reduce(
+  // const inputFiles = Object.keys(userSettings.styles.inputFiles).reduce(
   //   (attr, key) => ({
   //     ...attr,
-  //     [key]: userSettings.sass.inputFiles[key]
+  //     [key]: userSettings.styles.inputFiles[key]
   //   }),
   //   {}
   // )
 
-  const inputFiles = globSync(userSettings.sass.inputFiles)
+  const inputFiles = globSync(userSettings.styles.inputFiles)
 
-  const outputDir = userSettings.sass.outputPath ? path.resolve(process.cwd(), userSettings.sass.outputPath) : path.resolve(process.cwd(), './Resources/Public/Css/') // default aus constants nehmen
-  const fileFormat = userSettings.sass.outputFilePattern ? userSettings.sass.outputFilePattern : '[name].min[extname]'
+  const outputDir = userSettings.styles.outputPath ? path.resolve(process.cwd(), userSettings.styles.outputPath) : path.resolve(process.cwd(), './Resources/Public/Css/') // default aus constants nehmen
+  const fileFormat = userSettings.styles.outputFilePattern ? userSettings.styles.outputFilePattern : '[name].min[extname]'
 
   return {
     root: process.cwd(), // default?
