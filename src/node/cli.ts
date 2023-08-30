@@ -30,8 +30,8 @@ cli
         }
       )
     } catch (e) {
-      throw e
       process.exit(1)
+      // throw e
     } finally {
       console.log('Build finished (not yet)')
     }

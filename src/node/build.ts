@@ -1,8 +1,9 @@
 import { build as viteBuild } from 'vite'
 // import path from 'node:path'
-import sassConfig from './configs/sass'
-import cssConfig from './configs/css'
-import scriptConfig from './configs/script'
+// import sassConfig from './configs/sass'
+import buildConfig from './configs/build'
+// import cssConfig from './configs/css'
+// import scriptConfig from './configs/script'
 import buildSpritemap from './functions/spritemap'
 
 export async function build(userSettings: any, options: any) {
@@ -23,19 +24,25 @@ export async function build(userSettings: any, options: any) {
     //   })()
     // }
 
-    if (userSettings.styles && (!options.mode || options.mode === 'sass')) {
+    if (userSettings.build && (!options.mode)) {
       ;(async () => {
-        await viteBuild(cssConfig(userSettings, options))
+        await viteBuild(buildConfig(userSettings, options))
       })()
     }
 
-    if (userSettings.script && (!options.mode || options.mode === 'script')) {
-      ;(async () => {
-        await viteBuild(scriptConfig(userSettings, options))
-      })()
-    }
+    // if (userSettings.styles && (!options.mode || options.mode === 'sass')) {
+    //   ;(async () => {
+    //     await viteBuild(cssConfig(userSettings, options))
+    //   })()
+    // }
 
-    if (userSettings.spritemap && (!options.mode || options.mode === 'spritemap')) {
+    // if (userSettings.script && (!options.mode || options.mode === 'script')) {
+    //   ;(async () => {
+    //     await viteBuild(scriptConfig(userSettings, options))
+    //   })()
+    // }
+
+    if (userSettings.spritemap && (!options.mode || options.mode === 'spritemap')) { // remove last mode opt
       ;(async () => {
         await buildSpritemap(userSettings, options)
       })()
