@@ -1,10 +1,17 @@
 import path from 'node:path'
 import { globSync } from 'glob'
 import react from '@vitejs/plugin-react'
+import pc from 'picocolors'
 import { createRequire } from 'module' // feels like a bad way, no dynamic import or so possible?
 const require = createRequire(import.meta.url); // feels like a bad way, no dynamic import or so possible?
 
 const buildConfig = (userSettings: any, options: any) => {
+  // console.log('BUILDCONFIG STARTED')
+
+  if (!userSettings.build.inputFiles) {
+    console.log(pc.red(`✖ The option ${pc.bold('inputFiles')} could not be found in your Vitesse config file. Aborting mission.`))
+    process.exit(1)
+  }
 
   const inputFiles = globSync(userSettings.build.inputFiles)
 
@@ -28,8 +35,8 @@ const buildConfig = (userSettings: any, options: any) => {
 
   // console.log('TAILWIND CONFIG FILE', tailwindConfigPath)
   // console.log('CURRENT ENVT', process.env)
-  console.log('newextPath', extPath)
-  console.log('newoutpath', outputDir)
+  // console.log('newextPath', extPath)
+  // console.log('newoutpath', outputDir)
 
   // ToDo: mode for production and dev in watcher
   return {

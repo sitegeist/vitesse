@@ -33,7 +33,7 @@ const cssConfig = (userSettings: any, options: any) => {
 
   // console.log('TAILWIND CONFIG FILE', tailwindConfigPath)
   // console.log('CURRENT ENVT', process.env)
-  console.log('newoutpath', extPath)
+  // console.log('newoutpath', extPath)
 
   // ToDo: mode for production and dev in watcher
   return {

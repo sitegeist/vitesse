@@ -7,7 +7,10 @@ import buildConfig from './configs/build'
 import buildSpritemap from './functions/spritemap'
 
 export async function build(userSettings: any, options: any) {
-  console.log('build function fire')
+  // console.log('build function fire')
+  if (options.watch) {
+    console.log('The watcher will be watching out')
+  }
   try {
     // const workingDir = process.cwd()
     // console.log(options)
@@ -47,8 +50,6 @@ export async function build(userSettings: any, options: any) {
         await buildSpritemap(userSettings, options)
       })()
     }
-
-    return console.log('we did the build (not yet)')
   } catch (e) {
     throw new Error(e)
   }
