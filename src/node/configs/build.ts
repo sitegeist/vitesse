@@ -2,8 +2,9 @@ import path from 'node:path'
 import { globSync } from 'glob'
 import react from '@vitejs/plugin-react'
 import pc from 'picocolors'
-import { createRequire } from 'module' // feels like a bad way, no dynamic import or so possible?
-const require = createRequire(import.meta.url); // feels like a bad way, no dynamic import or so possible?
+import sassGlobImports from 'vite-plugin-sass-glob-import'
+import { createRequire } from 'module' // good practice? no dynamic import or so possible?
+const require = createRequire(import.meta.url); // good practice? no dynamic import or so possible?
 
 const buildConfig = (userSettings: any, options: any) => {
   // console.log('BUILDCONFIG STARTED')
@@ -73,6 +74,9 @@ const buildConfig = (userSettings: any, options: any) => {
       outDir: outputDir,
       emptyOutDir: userSettings.emptyOutDir || false
     },
+    plugins: [
+      sassGlobImports()
+    ],
     css: {
       postcss: {
         plugins: postCssPlugins
