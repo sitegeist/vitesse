@@ -4,8 +4,8 @@
 import path from 'node:path'
 import { globSync } from 'glob'
 // import postcss from 'rollup-plugin-postcss'
-import tailwindcss from 'tailwindcss'
-import autoprefixer from 'autoprefixer'
+// import tailwindcss from 'tailwindcss'
+// import autoprefixer from 'autoprefixer'
 import { createRequire } from 'module'; // feels like a bad way, no dynamic import or so possible?
 const require = createRequire(import.meta.url); // feels like a bad way, no dynamic import or so possible?
 
