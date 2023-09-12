@@ -22,7 +22,7 @@ jobs:
       - run: |
           yarn config set npmScopes.sitegeist.npmRegistryServer "https://registry.npmjs.org"
           yarn config set npmScopes.sitegeist.npmAlwaysAuth true
-          yarn config set npmScopes.sitegeist.npmAuthToken $NPM_AUTH_TOKEN
+          yarn config set npmScopes.sitegeist.npmAuthToken $NODE_AUTH_TOKEN
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: yarn install
