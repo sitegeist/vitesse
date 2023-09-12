@@ -12,7 +12,6 @@
   },
   "author": "Lennart Järvinen <lennart.jaervinen@sitegeist.de>",
   "license": "ISC",
-  "private": true,
   "exports": {
     ".": "./dist/node/index.js",
     "./package.json": "./package.json"
