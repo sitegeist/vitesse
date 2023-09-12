@@ -11,6 +11,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+          # check if caches can be added
           # cache: 'yarn'
           # cache-dependency-path: 'yarn.lock'
           registry-url: 'https://registry.npmjs.org'
@@ -18,7 +19,7 @@ jobs:
           scope: '@sitegeist'
       # check if cache really needs cleaning
       # - run: yarn cache clean --all
-      - run: yarn set version berry
+      - run: yarn set version berry # see if can be ommited
       - run: |
           yarn config set npmScopes.sitegeist.npmRegistryServer "https://registry.npmjs.org"
           yarn config set npmScopes.sitegeist.npmAlwaysAuth true
