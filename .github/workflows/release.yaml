@@ -11,14 +11,20 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
+          # cache: 'yarn'
+          # cache-dependency-path: 'yarn.lock'
           registry-url: 'https://registry.npmjs.org'
           # Defaults to the user or organization that owns the workflow file
           scope: '@sitegeist'
       # check if cache really needs cleaning
       # - run: yarn cache clean --all
       - run: yarn set version berry
+      - run: |
+          yarn config set npmScopes.sitegeist.npmRegistryServer "https://registry.npmjs.org"
+          yarn config set npmScopes.sitegeist.npmAlwaysAuth true
+          yarn config set npmScopes.sitegeist.npmAuthToken $NPM_AUTH_TOKEN
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: yarn install
       - run: yarn build
       - run: yarn npm publish --access public
