@@ -6,6 +6,7 @@ import commonjs from '@rollup/plugin-commonjs'
 // import nodePolyfills from 'rollup-plugin-node-polyfills';
 import typescript from '@rollup/plugin-typescript'
 import json from '@rollup/plugin-json'
+// import copy from 'rollup-plugin-copy'
 // import MagicString from 'magic-string'
 import type { RollupOptions } from 'rollup'
 import { defineConfig } from 'rollup'
@@ -61,6 +62,12 @@ function createNodePlugins(
     }),
     json(),
     // cjsPatchPlugin(),
+    // copy({
+    //   targets: [
+    //     { src: path.resolve(__dirname, 'src/node/tsconfig.json'), dest: 'dist/node/chunks/src/node' },
+    //     { src: path.resolve(__dirname, 'tsconfig.base.json'), dest: 'dist/node/chunks' }
+    //   ]
+    // })
   ]
 }
 

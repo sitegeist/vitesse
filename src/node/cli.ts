@@ -37,6 +37,30 @@ cli
     }
   })
 
+cli
+  .command('lint', 'Running vitesse linter')
+  .option('--mode [mode]', '[string] js or css')
+  .option('--config [configFileName]', '[string] alternative name of the config file')
+  .action(async (options) => {
+    console.log('linting lets gooo')
+    const { lint } = await import('./lint')
+    try {
+      await lint(
+        await getSettings(options.configFileName),
+        {
+          mode: options.mode,
+          configFileName: options.config,
+          watch: options.watch
+        }
+      )
+    } catch (e) {
+      throw e
+      // process.exit(1)
+    } finally {
+      console.log('didid')
+    }
+  })
+
 cli.parse()
 
 // const workingDir = (process.argv[3]) ? path.resolve(process.argv[3]) : process.cwd()

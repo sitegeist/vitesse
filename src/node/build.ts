@@ -9,7 +9,7 @@ import buildSpritemap from './functions/spritemap'
 export async function build(userSettings: any, options: any) {
   // console.log('build function fire')
   if (options.watch) {
-    console.log('The watcher will be watching out')
+    console.log('The watcher is on duty now')
   }
   try {
     // const workingDir = process.cwd()
