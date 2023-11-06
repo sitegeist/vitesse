@@ -1,6 +1,8 @@
 import path from 'node:path'
 import { globSync } from 'glob'
 import react from '@vitejs/plugin-react'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
+import sveltePreprocess from 'svelte-preprocess'
 import pc from 'picocolors'
 import sassGlobImports from 'vite-plugin-sass-glob-import'
 import { createRequire } from 'module' // good practice? no dynamic import or so possible?
@@ -25,12 +27,28 @@ const buildConfig = (userSettings: any, options: any) => {
     require('autoprefixer')()
   ]
 
+  let vitePlugins = [
+    sassGlobImports()
+  ]
+
   if (!userSettings.excludeTailwind) { // really necessary option? Just don't need to include it if not needed…
     const tailwindConfigPath = userSettings.build.tailwindConfigFile ? path.resolve(process.cwd(), userSettings.build.tailwindConfigFile) : path.resolve(process.cwd(), './tailwind.config.js')
 
     postCssPlugins = [
       require('tailwindcss')({ config: tailwindConfigPath }),
       ...postCssPlugins
+    ]
+  }
+
+  const svelteConfigFile = userSettings.build.svelteConfigFile ? path.resolve(process.cwd(), userSettings.build.svelteConfigFile) : path.resolve(process.cwd(), './svelte.config.js')
+
+  if (userSettings.includeSvelte) {
+    vitePlugins = [
+      ...vitePlugins,
+      svelte({
+        preprocess: sveltePreprocess(),
+        configFile: svelteConfigFile
+      })
     ]
   }
 
@@ -69,14 +87,17 @@ const buildConfig = (userSettings: any, options: any) => {
             return `Misc/[name].${extType}`
           },
         },
-        plugins: [ react() ]
+        plugins: [
+          react()
+        ],
+        // external: [
+        //   /^svelte\/.*/,
+        // ]
       },
       outDir: outputDir,
       emptyOutDir: userSettings.emptyOutDir || false
     },
-    plugins: [
-      sassGlobImports()
-    ],
+    plugins: vitePlugins,
     css: {
       postcss: {
         plugins: postCssPlugins
