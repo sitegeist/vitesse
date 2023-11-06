@@ -19,7 +19,7 @@ jobs:
           scope: '@sitegeist'
       # check if cache really needs cleaning
       # - run: yarn cache clean --all
-      - run: yarn set version berry # see if can be ommited
+      - run: yarn set version 3.6.1 # see if can be ommited
       - run: |
           yarn config set npmScopes.sitegeist.npmRegistryServer "https://registry.npmjs.org"
           yarn config set npmScopes.sitegeist.npmAlwaysAuth true
