@@ -18,15 +18,17 @@ export async function lint(userSettings: any, options: any) {
 
     const __dirname = path.dirname(__filename)
 
+    const configFile = userSettings.build.tailwindConfigFile ? path.resolve(process.cwd(), userSettings.lint.configFile) : path.resolve(process.cwd(), './.eslintrc.json')
+
     const defaultConfig = path.resolve(__dirname, 'src/node/configs/.eslintrc.cjs')
 
     console.log('defcon', defaultConfig)
 
-    // copied tsconfig and base.tsconfig in rollup plugin. still:
+    // copied tsconfig and base.tsconfig in rollup plugin. probably can't read linked types anyway? also:
     // says it doesn't find the files, even if added manually under "files" in eslint.ts
-    // eslint config file probably needs to be outsourced into project
+    // eslint config file probably needs to be outsourced into project -> also doesn't work, still needs tsconfig (in vitesse)
     const options = {
-      overrideConfig: lintConfig
+      overrideConfigFile: configFile
     }
 
     console.log('START LINT PROCESS')
