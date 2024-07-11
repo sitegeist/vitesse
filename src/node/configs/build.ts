@@ -45,7 +45,7 @@ const buildConfig = (userSettings: any, options: any) => {
   if (userSettings.includeSvelte) {
     vitePlugins = [
       ...vitePlugins,
-      svelte({
+      ...svelte({
         preprocess: sveltePreprocess(),
         configFile: svelteConfigFile
       })
@@ -58,10 +58,12 @@ const buildConfig = (userSettings: any, options: any) => {
   // console.log('newoutpath', outputDir)
 
   // ToDo: mode for production and dev in watcher
+
   return {
     root: process.cwd(), // default?
     base: extPath,
     build: {
+      modulePreload: userSettings.modulePreload === false ? false : { polyfill: true }, // option solely for TYPO3 >= 12 since the assets folder is dynamicall created. If could be passed here, preload could be used.
       manifest: true,
       watch: options.watch ? {} : null,
       rollupOptions: {
