@@ -14,6 +14,15 @@ Expandable, define a standard among projects, keep projects up to date…
 ## Setup
 …
 
+## Upgrade from 0.x.x to 1.x.x
+If you are not using typed imports, this option has to be added to your tsconfig.json:
+
+```json
+"compilerOptions": {
+  "verbatimModuleSyntax": true,
+}
+```
+
 ## Settings
 vitesse.config.json explanation
 table with all parameters

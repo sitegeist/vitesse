@@ -2,7 +2,7 @@ import path from 'node:path'
 import { globSync } from 'glob'
 import react from '@vitejs/plugin-react'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
-import sveltePreprocess from 'svelte-preprocess'
+import { sveltePreprocess } from 'svelte-preprocess'
 import pc from 'picocolors'
 import sassGlobImports from 'vite-plugin-sass-glob-import'
 import { createRequire } from 'module' // good practice? no dynamic import or so possible?
@@ -71,6 +71,7 @@ const buildConfig = (userSettings: any, options: any) => {
         output: {
           entryFileNames: `JavaScript/${fileFormat}`,
           chunkFileNames: 'JavaScript/Chunks/[name]-[hash].js',
+
           assetFileNames: (assetFile: any) => {
             const info = assetFile.name.split('.')
             const extType = info[info.length - 1]
