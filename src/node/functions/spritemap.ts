@@ -1,6 +1,6 @@
 import path from 'node:path'
 import fs from 'node:fs'
-import File from 'vinyl'
+// import File from 'vinyl'
 import SVGSpriter from 'svg-sprite'
 import { globSync } from 'glob'
 import chokidar from 'chokidar'
@@ -38,11 +38,7 @@ async function buildSpritemap(userSettings: any, options: any) {
         return
       }
       for (const file of files) {
-        spriter.add(new File({
-          path: file,
-          base: process.cwd(),
-          contents: fs.readFileSync(file)
-        }));
+        spriter.add(file, null, fs.readFileSync(file, 'utf-8'));
       }
 
       spriter.compile((error, result) => {
