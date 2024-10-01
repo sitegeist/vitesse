@@ -1,6 +1,6 @@
 {
   "name": "@sitegeist/vitesse",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "FE toolkit for sitegeist TYPO3 projects (mainly using Vite)",
   "bin": "bin/vitesse.js",
