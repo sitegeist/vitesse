@@ -2,15 +2,13 @@ import path from 'node:path'
 import { globSync } from 'glob'
 import react from '@vitejs/plugin-react'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
-import sveltePreprocess from 'svelte-preprocess'
+import { sveltePreprocess } from 'svelte-preprocess'
 import pc from 'picocolors'
 import sassGlobImports from 'vite-plugin-sass-glob-import'
-import { createRequire } from 'module' // good practice? no dynamic import or so possible?
-const require = createRequire(import.meta.url); // good practice? no dynamic import or so possible?
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url);
 
 const buildConfig = (userSettings: any, options: any) => {
-  // console.log('BUILDCONFIG STARTED')
-
   if (!userSettings.build.inputFiles) {
     console.log(pc.red(`✖ The option ${pc.bold('inputFiles')} could not be found in your Vitesse config file. Aborting mission.`))
     process.exit(1)
@@ -19,9 +17,9 @@ const buildConfig = (userSettings: any, options: any) => {
   const inputFiles = globSync(userSettings.build.inputFiles)
 
   const outputPath = userSettings.build.outputPath || './Resources/Public/Build/'
-  const outputDir = path.resolve(process.cwd(), outputPath) // defaults aus constants nehmen
-  const extPath = userSettings.extensionPath ? path.resolve(userSettings.extensionPath, outputPath) : path.resolve('/typo3conf/ext/sitepackage/', outputPath) // default aus constants nehmen
-  const fileFormat = userSettings.build.outputFilePattern || '[name].min.js' // greift hier noch nicht?
+  const outputDir = path.resolve(process.cwd(), outputPath)
+  const extPath = userSettings.extensionPath ? path.resolve(userSettings.extensionPath, outputPath) : path.resolve('/typo3conf/ext/sitepackage/', outputPath)
+  const fileFormat = userSettings.build.outputFilePattern || '[name].min.js'
 
   let postCssPlugins = [
     require('autoprefixer')()
@@ -52,15 +50,8 @@ const buildConfig = (userSettings: any, options: any) => {
     ]
   }
 
-  // console.log('TAILWIND CONFIG FILE', tailwindConfigPath)
-  // console.log('CURRENT ENVT', process.env)
-  // console.log('newextPath', extPath)
-  // console.log('newoutpath', outputDir)
-
-  // ToDo: mode for production and dev in watcher
-
   return {
-    root: process.cwd(), // default?
+    root: process.cwd(),
     base: extPath,
     build: {
       modulePreload: userSettings.modulePreload === false ? false : { polyfill: true }, // option solely for TYPO3 >= 12 since the assets folder is dynamicall created. If could be passed here, preload could be used.
@@ -71,6 +62,7 @@ const buildConfig = (userSettings: any, options: any) => {
         output: {
           entryFileNames: `JavaScript/${fileFormat}`,
           chunkFileNames: 'JavaScript/Chunks/[name]-[hash].js',
+
           assetFileNames: (assetFile: any) => {
             const info = assetFile.name.split('.')
             const extType = info[info.length - 1]
@@ -91,10 +83,7 @@ const buildConfig = (userSettings: any, options: any) => {
         },
         plugins: [
           react()
-        ],
-        // external: [
-        //   /^svelte\/.*/,
-        // ]
+        ]
       },
       outDir: outputDir,
       emptyOutDir: userSettings.emptyOutDir || false
