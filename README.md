@@ -29,7 +29,7 @@ If you are **not** using typed imports (e.g. `import { value, type Type } from '
 If the file doesn't exist yet, create it.
 
 ### Step 3
-Create a `vitesse.config.json` file and add your build [settings](#setting)
+Create a `vitesse.config.json` file and add your build [settings](#settings)
 
 ## Settings
 | Setting                  | Type          | Default                                       |
@@ -48,6 +48,7 @@ Create a `vitesse.config.json` file and add your build [settings](#setting)
 | excludeTailwind          | Boolean       | false                                         |
 | includeSvelte            | Boolean       | false                                         |
 | modulePreload            | Boolean       | true                                          |
+
 
 ## Usage
 Run the commands `vitesse` for build or `vitesse --watch` for watcher or add this to your `package.json` file:
