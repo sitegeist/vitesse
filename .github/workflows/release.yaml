@@ -10,7 +10,7 @@ jobs:
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 22
           # check if caches can be added
           # cache: 'yarn'
           # cache-dependency-path: 'yarn.lock'
@@ -19,7 +19,7 @@ jobs:
           scope: '@sitegeist'
       # check if cache really needs cleaning
       # - run: yarn cache clean --all
-      - run: yarn set version 3.6.1 # see if can be ommited
+      - run: yarn set version 4.5.0 # see if can be ommited
       - run: |
           yarn config set npmScopes.sitegeist.npmRegistryServer "https://registry.npmjs.org"
           yarn config set npmScopes.sitegeist.npmAlwaysAuth true
