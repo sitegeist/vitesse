@@ -1216,7 +1216,7 @@ __metadata:
     vite-plugin-sass-glob-import: "npm:^5.0.0"
   peerDependencies:
     "@types/node": ^20.3.3
-    tailwindcss: ">= 3.0.0 || < 5"
+    tailwindcss: ^4
   peerDependenciesMeta:
     "@types/node":
       optional: true
