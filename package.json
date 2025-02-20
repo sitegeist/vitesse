@@ -1,6 +1,6 @@
 {
   "name": "@sitegeist/vitesse",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "type": "module",
   "description": "FE toolkit for sitegeist TYPO3 projects (mainly using Vite)",
   "bin": "bin/vitesse.js",
@@ -25,8 +25,7 @@
   "packageManager": "yarn@4.5.0",
   "peerDependencies": {
     "@types/node": "^20.3.3",
-    "svelte": "^4",
-    "tailwindcss": "^3"
+    "tailwindcss": ">= 3.0.0 || < 5"
   },
   "dependencies": {
     "@rollup/plugin-commonjs": "^28.0.2",
@@ -47,6 +46,7 @@
     "rimraf": "^6.0.1",
     "rollup": "^4.34.8",
     "sass": "^1.85.0",
+    "svelte": "^4.2.3",
     "svelte-preprocess": "^6.0.3",
     "svg-sprite": "^2.0.4",
     "tslib": "^2.8.1",
@@ -57,9 +57,6 @@
   },
   "peerDependenciesMeta": {
     "@types/node": {
-      "optional": true
-    },
-    "svelte": {
       "optional": true
     },
     "tailwindcss": {
