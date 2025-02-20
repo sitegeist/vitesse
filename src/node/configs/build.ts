@@ -22,21 +22,13 @@ const buildConfig = (userSettings: any, options: any) => {
   const fileFormat = userSettings.build.outputFilePattern || '[name].min.js'
 
   let postCssPlugins = [
-    require('autoprefixer')()
+    require('autoprefixer')(),
+    require('@tailwindcss/postcss')(),
   ]
 
   let vitePlugins = [
     sassGlobImports()
   ]
-
-  if (!userSettings.excludeTailwind) { // really necessary option? Just don't need to include it if not needed…
-    const tailwindConfigPath = userSettings.build.tailwindConfigFile ? path.resolve(process.cwd(), userSettings.build.tailwindConfigFile) : path.resolve(process.cwd(), './tailwind.config.js')
-
-    postCssPlugins = [
-      require('tailwindcss')({ config: tailwindConfigPath }),
-      ...postCssPlugins
-    ]
-  }
 
   const svelteConfigFile = userSettings.build.svelteConfigFile ? path.resolve(process.cwd(), userSettings.build.svelteConfigFile) : path.resolve(process.cwd(), './svelte.config.js')
 
