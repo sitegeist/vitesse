@@ -9,8 +9,13 @@ import pc from 'picocolors'
 async function buildSpritemap(userSettings: any, options: any) {
   const inputFiles = userSettings.spritemap.inputFiles ? path.resolve(process.cwd(), userSettings.spritemap.inputFiles) : path.resolve(process.cwd(), './Resources/Private/Images/SVG-Icons/**/*.svg') // default aus constants nehmen
   const outputDir = userSettings.spritemap.outputPath ? path.resolve(process.cwd(), userSettings.spritemap.outputPath) : path.resolve(process.cwd(), './Resources/Public/Images/') // default aus constants nehmen
-  const outputName = userSettings.spritemap.outputFileName || 'svg-icons.svg'
+  let outputName = userSettings.spritemap.outputFileName || 'svg-icons.svg'
   const prefix = userSettings.spritemap.prefix || ''
+
+  if (userSettings.spritemap.addHash) {
+    const now = Date.now()
+    outputName = `${outputName}?${now}`
+  }
 
   const build = () => {
     try {
