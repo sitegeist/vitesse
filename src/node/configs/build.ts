@@ -5,6 +5,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { sveltePreprocess } from 'svelte-preprocess'
 import pc from 'picocolors'
 import sassGlobImports from 'vite-plugin-sass-glob-import'
+import jsonImporter from '@blakedarlin/sass-json-importer'
 import { createRequire } from 'module'
 const require = createRequire(import.meta.url);
 
@@ -82,6 +83,15 @@ const buildConfig = (userSettings: any, options: any) => {
     },
     plugins: vitePlugins,
     css: {
+      preprocessorOptions: {
+        scss: {
+          importers: [
+            jsonImporter({
+              stringifyKeys: true
+            })
+          ]
+        }
+      },
       postcss: {
         plugins: postCssPlugins
       }
